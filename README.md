@@ -1,3 +1,5 @@
+<p align="center"><img src="https://kunigo-readme-compass.lovable.app/__l5e/assets-v1/aecc5b1b-a29b-4b87-ad18-9fa16bf00b1b/triage-logo.png" alt="Triage – Your path to the right support." width="360"></p>
+
 # Triage
 
 ### Your path to the right support.
@@ -5,6 +7,28 @@
 *A shared, public guide that helps people with a migration background in Lucerne find the right advice centre or service, in their own language, without giving away any personal data.*
 
 Built at the Lucerne Hackathon (November 2026) for **mira – mobile Informationen, Rat und Austausch**, a pilot project run by KUNIGO and commissioned by the Canton and City of Lucerne.
+
+<table>
+<tr>
+<td><img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=10&data=https%3A%2F%2Flucerne-help-match.lovable.app%2F" alt="QR code to the Triage website" width="150"></td>
+<td>
+
+**▶ Try it live:** [lucerne-help-match.lovable.app](https://lucerne-help-match.lovable.app/)<br>
+Scan the QR code with your phone, or open the [personal guide](https://lucerne-help-match.lovable.app/guide) or the [service directory](https://lucerne-help-match.lovable.app/services).
+
+**For the data team:** [Admin sign-in](https://kunigo-readme-compass.lovable.app/admin)
+
+| Demo admin login | |
+|---|---|
+| Admin web | https://kunigo-readme-compass.lovable.app/admin |
+| Email | `admin@triangle.lovable` |
+| Password | `Triage-f88e5db0-Lu` |
+
+<sub>Hackathon demo account. The password will be changed after the judging.</sub>
+
+</td>
+</tr>
+</table>
 
 ---
 
@@ -40,13 +64,28 @@ Hana opens Triage on her phone and taps **"I'm helping someone"**.
 
 Selam leaves with the right addresses, and Hana didn't have to remember every rule of every service in Lucerne.
 
+## Take the tour
+
+Open each step on the [live site](https://lucerne-help-match.lovable.app/) and follow Selam's path:
+
+| # | Screen | What you see |
+|---|---|---|
+| 1 | [Welcome](https://lucerne-help-match.lovable.app/) | Start a personal guide or search services directly. Multilingual, local, no registration |
+| 2 | [Personal guide: 6 questions](https://lucerne-help-match.lovable.app/guide) | Language → citizenship → where you live → how long you have been here → residence permit (optional, private) → topics |
+| 3 | [My guide](https://lucerne-help-match.lovable.app/my-guide) | Next steps, services that match the answers, and a QR code that opens the guide as a PDF on the person's own phone |
+| 4 | [My checklist](https://lucerne-help-match.lovable.app/checklist) | Ticks are saved only on this device |
+| 5 | [Service directory](https://lucerne-help-match.lovable.app/services) | Search by topic or keyword, "only matching my answers", costs clearly marked |
+| 6 | [Admin platform](https://kunigo-readme-compass.lovable.app/admin) | Upload a partner's Excel list → check flagged rows → publish to the website (sign-in for the data team only) |
+
+> Tip: complete the 6 questions first, then "My guide" and "My checklist" show results for your answers.
+
 ## Behind the scenes: keeping the guide true
 
 A guide is only as good as its information, and that information lives in partner organisations' Excel lists, which change all the time. So Triage has a second side: a back office for the people who look after the data.
 
-When a partner sends an updated list, an administrator:
+When a partner sends an updated list, an administrator signs in at [`/admin`](https://kunigo-readme-compass.lovable.app/admin) and:
 
-1. **Drags the Excel file** into the admin app. Triage finds the column names, and if a provider names its columns differently, the admin matches them once and Triage remembers.
+1. **Drags the Excel file** into the admin platform. Triage finds the column names, and if a provider names its columns differently, the admin matches them once and Triage remembers.
 2. **Lets the database do the reading.** Every row is turned into the platform's structure: organisation, offer, category, phone, email, website, cost, area, and eligibility rules such as *"only for residents of Kriens"* or *"not for people with permit N, F or B"*.
 3. **Checks what's unclear.** Anything the system isn't sure about, such as an exception, an exclusion or a missing contact, is flagged with the reason. Nothing is guessed silently.
 4. **Clicks Publish.** The offers appear in the public guide straight away.
@@ -63,37 +102,42 @@ The original row from every file is kept next to the result, so anyone can see w
 
 ## How it's built
 
-| Part | What it does | Tech |
-|---|---|---|
-| **Public guide** *(in progress)* | The 6-step questions, personal guide and QR code for immigrants and key persons | React, hosted on Vercel |
-| **Admin app** (`admin/`) | Sign-in, Excel import with column matching, review, publish, edit live offers | Vite + React + TypeScript, SheetJS |
-| **Database** (`supabase/migrations/`) | Organisations, services, categories, eligibility rules, translations, change log, import pipeline | Supabase (PostgreSQL, Auth for admins only, row-level security, Storage) |
+Triage has **two doors**: a public website for immigrants and key persons ([lucerne-help-match.lovable.app](https://lucerne-help-match.lovable.app/)), and an admin platform for the people who keep the data up to date ([kunigo-readme-compass.lovable.app/admin](https://kunigo-readme-compass.lovable.app/admin)).
 
-Search starts with PostgreSQL full-text search, so basic results never depend on a paid AI service. A column for multilingual embeddings is already there for semantic search later.
+| Part | Where | What it does |
+|---|---|---|
+| **Public guide** | [`/`](https://lucerne-help-match.lovable.app/) and [`/guide`](https://lucerne-help-match.lovable.app/guide) | Welcome page, the 6 questions, a personal guide with a checklist and recommended services, and a QR code to take it home |
+| **Service directory** | [`/services`](https://lucerne-help-match.lovable.app/services) | Search by everyday topic or keyword, filter to "only matching my answers", with requirements and costs clearly marked |
+| **Admin platform** | [`/admin`](https://kunigo-readme-compass.lovable.app/admin) | Sign-in for the data team, Excel upload from partner organisations, review and publish |
+| **Database design** | [`supabase/migrations/`](supabase/migrations/) | Organisations, services, categories, eligibility rules, translations, change log and the Excel import pipeline, as SQL |
+
+**Tech:** built with [Lovable](https://lovable.dev): React, TypeScript, Vite, shadcn/ui, with server functions for search and data. The database design follows the schema in `supabase/migrations/`. Search is deterministic (keywords, categories and eligibility rules), so basic results never depend on a paid AI service.
 
 ```
-Partner Excel ──► Admin app ──► Supabase ──► Public guide ──► QR code on Selam's phone
-                  match · review    rules · search    6 questions        nothing stored
+Partner Excel ──► /admin ──► database ──► /guide & /services ──► QR code on Selam's phone
+                  upload · review   rules · search    6 questions · search    nothing stored
 ```
 
 ## Try it yourself
 
+The fastest way is the [live app](https://lucerne-help-match.lovable.app/). To run it locally:
+
 ```bash
 git clone https://github.com/SelenaG4/KunigowithPowerCoder.git
-cd KunigowithPowerCoder/admin
-cp .env.example .env.local
-npm install
-npm run dev        # admin app on http://localhost:5173
+cd KunigowithPowerCoder
+npm install        # or: bun install
+npm run dev
 ```
 
-To deploy the admin app on Vercel and create the first administrator, see [`admin/README.md`](admin/README.md). The database setup lives in [`supabase/migrations/`](supabase/migrations/), in the order it should run.
+The project can also be opened and edited in Lovable using the "Edit with Lovable" link on the live site.
 
 ## What comes next
 
 - [x] Database with eligibility rules and full-text search
 - [x] Excel import from partner lists (tested with the Fabia and Sentitreff lists)
-- [x] Admin app: sign in, import, review, publish
-- [ ] Public guide: 6-step questions, personal guide, QR code
+- [x] Admin platform: sign in, upload Excel, review, publish
+- [x] Public guide: 6-step questions, personal guide, QR code
+- [x] Service directory with topic filters and "only matching my answers"
 - [ ] Languages of the mira pilot first, German, Spanish and Tigrinya, then English and more
 - [ ] Test with mira's key persons at real community meetings
 - [ ] Optional: book a call with a key person straight from the guide
