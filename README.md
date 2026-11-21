@@ -1,4 +1,4 @@
-# mira Wegweiser Luzern
+#Triage Luzern
 
 **A shared, public triage tool that helps people with a migration background in Lucerne find the right advice centre or service, quickly and simply.**
 
