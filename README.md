@@ -1,4 +1,4 @@
-# KUNIGO Luzern
+# mira Wegweiser Luzern
 
 **A shared, public triage tool that helps people with a migration background in Lucerne find the right advice centre or service, quickly and simply.**
 
@@ -72,8 +72,8 @@ source:          Organisation / submitted by
 ## Getting started
 
 ```bash
-git clone https://github.com/<your-org>/mira-wegweiser.git
-cd mira-wegweiser
+git clone https://github.com/SelenaG4/KunigowithPowerCoder.git
+cd KunigowithPowerCoder
 npm install
 npm run dev
 ```
@@ -100,7 +100,7 @@ We welcome contributions! You can:
 
 ## Team
 
-Built at the Lucerne Hackathon, November 2026.
+Built by **[KunigowithPowerCoder](https://github.com/SelenaG4/KunigowithPowerCoder)** at the Lucerne Hackathon, November 2026.
 <!-- Add team member names here -->
 
 ## License
