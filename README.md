@@ -36,9 +36,9 @@ Hana opens Triage on her phone and taps **"I'm helping someone"**.
 
 - **Six short questions, in Selam's language:** language, citizenship, where she lives, how long she has been here, her residence permit if she knows it, and what she needs help with. No name, no email, no account.
 - **A personal guide appears:** a simple checklist of next steps and the services that fit Selam's situation. Offers she cannot use are not hidden. They are clearly marked, with the reason in plain words: *"Not for people who receive social assistance from the DAF."*
-- **Anna scans a QR code** and the guide opens on her own phone. She can come back to it tonight, show it to her family, or open it again at the next appointment. Nobody stored anything about her.
+- **Selam scans a QR code** and the guide opens on her own phone. She can come back to it tonight, show it to her family, or open it again at the next appointment. Nobody stored anything about her.
 
-Anna leaves with the right addresses, and Hana didn't have to remember every rule of every service in Lucerne.
+Selam leaves with the right addresses, and Hana didn't have to remember every rule of every service in Lucerne.
 
 ## Behind the scenes: keeping the guide true
 
